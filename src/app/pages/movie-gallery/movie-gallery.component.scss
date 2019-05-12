@@ -1,0 +1,17 @@
+.add-movie-btn{
+        position: absolute;
+        right: 20px;
+        top: 20px;
+}
+
+.card {
+    background-color: lightblue;
+    margin: 25px;
+    width: 20rem; 
+    height: 20rem;
+    position: relative;
+}
+
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}

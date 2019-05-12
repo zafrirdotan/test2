@@ -1,0 +1,26 @@
+<div class="page-container d-flex justify-content-center">
+    <div class="list-container d-flex flex-column" *ngIf="!isAddingMovie">
+        <button class="btn btn-success add-movie-btn" (click)="onAddMovie()">Add Movie</button>
+        <app-movie-list [movies]="movieService.movies"></app-movie-list>
+    </div>
+    <form (ngSubmit)="checkTitle(f)" #f="ngForm">
+        <div class="card center d-flex flex-column justify-content-around" *ngIf="isAddingMovie">
+            <input type="text" placeholder="Please enter movie's title" ngModel name="movieTitle" required #title="ngModel">
+            <span class="help-block" *ngIf="!title.valid && title.touched">Please insert a valid movie title!</span>
+            <span class="help-block" *ngIf="isDuplicated">Movie title already exist!</span>
+            <input type="text" placeholder="Please enter movie's director" ngModel name="movieDirector" required #director="ngModel">
+            <span class="help-block" *ngIf="!director.valid && director.touched">Please insert a valid director!</span>
+            <input type="number" placeholder="Please enter movie's release year" ngModel name="movieYear" required #year="ngModel">
+            <span class="help-block" *ngIf="!year.valid && year.touched">Please insert a valid release year!</span>
+            <input type="text" placeholder="Please enter movie's runtime" ngModel name="movieRuntime" required #runtime="ngModel">
+            <span class="help-block" *ngIf="!runtime.valid && runtime.touched">Please insert a valid movie runtime!</span>
+            <input type="text" placeholder="Please enter movie's genre" ngModel name="movieGenre" required #genre="ngModel">
+            <span class="help-block" *ngIf="!genre.valid && genre.touched">Please insert a valid genre!</span>
+            <div class="edit-buttons d-flex justify-content-around">
+                <button class="btn btn-success" [disabled]="!f.valid">Save</button>
+                <button class="btn btn-danger" (click)="onCancelAdd()">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>
+

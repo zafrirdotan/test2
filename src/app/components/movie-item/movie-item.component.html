@@ -1,0 +1,51 @@
+<div class="card">
+  <div class="card-body d-flex flex-column justify-content-around">
+    <div *ngIf="!isEdited">
+      <div class="movie-info">
+        <h5 class="card-title d-flex justify-content-center">{{ movie.Title | titlecase}}</h5>
+        <p class="input"> Director: <span>{{ movie.Director | titlecase}}</span> </p>
+        <p class="input"> Year: <span> {{ movie.Year }}</span></p>
+        <p class="input"> Runtime: <span> {{ movie.Runtime }}</span></p>
+        <p class="input"> Genre: <span>{{ movie.Genre | titlecase}}</span></p>
+      </div>
+      <div class="buttons-container d-flex justify-content-around" *ngIf="!isDelete">
+        <button class="btn btn-primary edit-btn " (click)="editMovie()">Edit</button>
+        <button class="btn btn-danger edit-btn" (click)="onDeleteMovie()">Delete</button>
+      </div>
+    </div>
+
+    <form (ngSubmit)="checkTitle(f)" #f="ngForm">
+      <div class="card-body d-flex flex-column justify-content-around" *ngIf="isEdited">
+        <input type="text" placeholder="Please enter movie's title" [(ngModel)]="movie.Title" name="movieTitle" required
+          #title="ngModel">
+          <span class="help-block" *ngIf="isTitleDuplicated">Movie title already exist!</span>
+        <span class="help-block" *ngIf="!title.valid && title.touched">Please insert a valid movie title!</span>
+        <input type="text" placeholder="Please enter movie's director" [(ngModel)]="movie.Director" name="movieDirector"
+          required #director="ngModel">
+        <span class="help-block" *ngIf="!director.valid && director.touched">Please insert a valid director!</span>
+        <input type="number" placeholder="Please enter movie's release year" [(ngModel)]="movie.Year" name="movieYear"
+          required #year="ngModel">
+        <span class="help-block" *ngIf="!year.valid && year.touched">Please insert a valid release year!</span>
+        <input type="text" placeholder="Please enter movie's runtime" [(ngModel)]="movie.Runtime" name="movieRuntime"
+          required #runtime="ngModel">
+        <span class="help-block" *ngIf="!runtime.valid && runtime.touched">Please insert a valid movie runtime!</span>
+        <input type="text" placeholder="Please enter movie's genre" [(ngModel)]="movie.Genre" name="movieGenre" required
+          #genre="ngModel">
+        <span class="help-block" *ngIf="!genre.valid && genre.touched">Please insert a valid genre!</span>
+        <div class="buttons-container edit-buttons d-flex justify-content-around">
+          <button class="btn btn-success edit-btn">Save</button>
+          <button class="btn btn-danger edit-btn" (click)="onEditCanceled()">Cancel</button>
+        </div>
+      </div>
+    </form>
+
+    <div *ngIf="isDelete" class="delete-popup">
+      <h5 class="card-title d-flex justify-content-center">Delete Movie?</h5>
+      <div class="delete-buttons d-flex justify-content-around">
+        <button class="btn btn-success edit-btn" (click)="deleteMovie(movie)">OK</button>
+        <button class="btn btn-danger edit-btn" (click)="onDeleteCanceled()">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+</div>
