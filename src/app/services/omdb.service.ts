@@ -11,7 +11,7 @@ export class OmdbService {
   readonly ApiKey: string = '1ce46be1';
 
   fetchMovie(title: string): Observable<any> {
-    return this.http.get(`http://www.omdbapi.com/?t=${title}&apikey=1ce46be1`);
+    return this.http.get(`https://www.omdbapi.com/?t=${title}&apikey=1ce46be1`);
   }
 
   getMovies(title) {
